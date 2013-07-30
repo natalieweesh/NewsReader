@@ -3,5 +3,8 @@ NewReader::Application.routes.draw do
     resources :entries, only: [:index]
   end
 
-  root to: "feeds#index"
+  root to: "sessions#new"
+
+  resources :users
+  resource :session
 end
