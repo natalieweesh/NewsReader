@@ -3,6 +3,10 @@ NewReader.Views.FeedDetailView = Backbone.View.extend({
 
   tagName: "ul",
 
+  events: {
+    "click #refresh-button" : "refresh"
+  },
+
   render: function() {
     var that = this;
 
@@ -12,12 +16,23 @@ NewReader.Views.FeedDetailView = Backbone.View.extend({
 
     that.$el.html(renderedContent);
 
-    _.each(that.model.get("entries"), function(entry) {
+    that.model.get("entries").sort();
+
+    that.model.get("entries").each( function(entry) {
       var entryView = new NewReader.Views.EntryView(entry);
       that.$el.append(entryView.$el);
       entryView.render();
-    })
+    });
 
     return that;
+  },
+
+  refresh: function() {
+    var that = this;
+    this.model.fetch({
+      success: function() {
+        that.render();
+      }
+    });
   }
 });

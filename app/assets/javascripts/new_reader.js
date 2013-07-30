@@ -4,24 +4,9 @@ window.NewReader = {
   Views: {},
   Routers: {},
   initialize: function($sidebar, $content, feedsData) {
-    var feeds = new NewReader.Collections.Feeds(feedsData);
-
-    this.installSidebar($sidebar, feeds);
-
-    new NewReader.Routers.FeedsRouter($sidebar, $content, feeds)
-
+    new NewReader.Routers.FeedsRouter($sidebar, $content, feedsData);
     Backbone.history.start();
   },
-
-  installSidebar: function($sidebar, feeds) {
-    var that = this;
-
-    var feedsListView = new NewReader.Views.FeedsListView({
-      collection: feeds
-    });
-
-    $sidebar.html(feedsListView.render().$el);
-  }
 };
 
 $(function() {

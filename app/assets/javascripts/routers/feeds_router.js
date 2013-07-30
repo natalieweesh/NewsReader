@@ -1,8 +1,8 @@
 NewReader.Routers.FeedsRouter = Backbone.Router.extend({
-  initialize: function($sidebar, $content, feeds) {
+  initialize: function($sidebar, $content, feedsData) {
     this.$sidebar = $sidebar;
     this.$content = $content;
-    this.feeds = feeds;
+    this.feeds = new NewReader.Collections.Feeds(feedsData);
   },
 
   routes: {
@@ -13,11 +13,7 @@ NewReader.Routers.FeedsRouter = Backbone.Router.extend({
   index: function() {
     var that = this;
 
-    var feedsListView = new NewReader.Views.FeedsListView({
-      collection: that.feeds
-    });
-
-    that.$sidebar.html(feedsListView.render().$el);
+    this.installSidebar(this.$sidebar, this.feeds);
   },
 
   show: function(id) {
@@ -29,6 +25,16 @@ NewReader.Routers.FeedsRouter = Backbone.Router.extend({
       model: feed
     });
 
-    that.$content.html(feedDetailView.render().$el);
+    this.$content.html(feedDetailView.render().$el);
+    this.installSidebar(this.$sidebar, this.feeds);
+  },
+
+  installSidebar: function($sidebar, feeds) {
+    var that = this;
+
+    var feedsListView = new NewReader.Views.FeedsListView({
+      collection: feeds
+    });
+    $sidebar.html(feedsListView.render().$el);
   }
 });

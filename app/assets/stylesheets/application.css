@@ -12,14 +12,11 @@
  *= require_tree .
  */
 
-#sidebar {
-
-  margin-bottom: 5000px;
-  padding-bottom: 5000px;
+#sidebar, #refresh-button {
   float: left;
-  padding-right: 50px;
 }
 
-#contents {
+#content {
   margin: auto;
+  overflow: auto;
 }

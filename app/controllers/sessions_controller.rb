@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   skip_before_filter :authenticate, only: [:new, :create]
 
   def new
+    redirect_to feeds_url if(current_user)
   end
 
   def create

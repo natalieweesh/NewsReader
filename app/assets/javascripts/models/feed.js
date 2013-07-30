@@ -1,20 +1,19 @@
 NewReader.Models.Feed = Backbone.Model.extend({
 
   initialize: function(response) {
-    this.initEntries();
-    this.parse(response);
-  },
-
-  initEntries: function() {
-    this.entries = new NewReader.Collections.Entries();
+    this.attributes = this.parse(response);
   },
 
   parse: function(response) {
-    if(!this.entries)
-      this.initEntries();
+
+    var responseCollection = new NewReader.Collections.Entries();
 
     for(var i = 0; i < response.entries.length; i++) {
-      this.entries.add(response.entries[i]);
+      responseCollection.add(response.entries[i]);
     }
+
+    response.entries = responseCollection;
+
+    return response;
   }
 });

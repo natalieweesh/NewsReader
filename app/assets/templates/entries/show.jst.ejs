@@ -1,1 +1,1 @@
-<a href="<%= entry.link %>"><%= entry.title %></a>
+<a href="<%= entry.link %>"><%= entry.escape('title') %></a> (<%= entry.escape('published_at') %>)

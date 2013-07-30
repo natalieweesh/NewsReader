@@ -1,7 +1,9 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :title, :url
+  attr_accessible :title, :url, :user_id, :favorited
 
   has_many :entries, :dependent => :destroy
+
+  belongs_to :user
 
   def self.find_or_create_by_url(url)
     feed = Feed.find_by_url(url)
@@ -18,6 +20,12 @@ class Feed < ActiveRecord::Base
     end
 
     feed
+  end
+
+  def refresh
+    if(Time.now - self.updated_at > 120)
+      self.reload
+    end
   end
 
   def reload
