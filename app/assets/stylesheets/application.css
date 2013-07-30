@@ -11,3 +11,15 @@
  *= require_self
  *= require_tree .
  */
+
+#sidebar {
+
+  margin-bottom: 5000px;
+  padding-bottom: 5000px;
+  float: left;
+  padding-right: 50px;
+}
+
+#contents {
+  margin: auto;
+}
