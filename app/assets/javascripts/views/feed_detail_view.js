@@ -4,7 +4,8 @@ NewReader.Views.FeedDetailView = Backbone.View.extend({
   tagName: "ul",
 
   events: {
-    "click #refresh-button" : "refresh"
+    "click #refresh-button" : "refresh",
+    "click #favorite-button" : "favorite"
   },
 
   render: function() {
@@ -34,5 +35,17 @@ NewReader.Views.FeedDetailView = Backbone.View.extend({
         that.render();
       }
     });
+  },
+
+  favorite: function() {
+    var that = this;
+
+    this.model.save({favorited: true},
+      {success: function(model) {
+          that.model = model;
+          that.options.installSidebar();
+        }
+      }
+    );
   }
 });

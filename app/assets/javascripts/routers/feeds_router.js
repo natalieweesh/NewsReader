@@ -22,7 +22,10 @@ NewReader.Routers.FeedsRouter = Backbone.Router.extend({
     var feed = that.feeds.findWhere({id: parseInt(id)});
 
     var feedDetailView = new NewReader.Views.FeedDetailView({
-      model: feed
+      model: feed,
+      installSidebar: function() {
+        that.installSidebar(that.$sidebar, that.feeds);
+      }
     });
 
     this.$content.html(feedDetailView.render().$el);
@@ -30,6 +33,7 @@ NewReader.Routers.FeedsRouter = Backbone.Router.extend({
   },
 
   installSidebar: function($sidebar, feeds) {
+    console.log("running installSidebar");
     var that = this;
 
     var feedsListView = new NewReader.Views.FeedsListView({

@@ -1,5 +1,5 @@
 NewReader::Application.routes.draw do
-  resources :feeds, only: [:index, :create, :show] do
+  resources :feeds, only: [:index, :create, :show, :update] do
     resources :entries, only: [:index]
   end
 

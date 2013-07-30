@@ -24,3 +24,7 @@
 .favorite {
   font-weight: bold;
 }
+
+button {
+  display: block;
+}
